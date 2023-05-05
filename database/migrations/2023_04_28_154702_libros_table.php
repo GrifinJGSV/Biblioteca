@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('titulo');
             $table->string('autor');
             $table->string('editorial');
-            $table->date('anio');
+            $table->integer('anio');
             $table->integer('cantidad_disponible');
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('libros');
     }
 };

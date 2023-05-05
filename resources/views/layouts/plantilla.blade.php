@@ -23,7 +23,14 @@
                       <a class="nav-link active" aria-current="page" href="/">Home</a>
                   </li>
                   <li class="nav-item">
+                    <a class="nav-link" href="{{ route("usuarioindex") }}">Usuarios</a>
+                </li>
+
+                  <li class="nav-item">
                       <a class="nav-link" href="{{ route("libroindex") }}">libros</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route("prestamoindex")}}">Prestamos</a>
                   </li>
 
 
@@ -40,7 +47,7 @@
     </div>
 
     <div>
-        Pie de pagina. Copyright 2023
+
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->

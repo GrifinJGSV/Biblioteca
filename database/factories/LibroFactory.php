@@ -18,10 +18,10 @@ class LibroFactory extends Factory
     public function definition(): array
     {
         return [
-            'titulo' => $this->faker->word,
+            'titulo' => $this->faker->name,
             'autor' => $this->faker->name,
             'editorial' => $this-> faker->name,
-            'anio' => $this->faker->date(),
+            'anio' => $this->faker->numerify('####'),
             'cantidad_disponible' => $this->faker->numerify('###'),
         ];
     }

@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Libro;
+use App\Models\Usuario;
 use App\Models\Prestamo;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\FuncCall;
 
 class PrestamoController extends Controller
 {
     public function index(){
         $prestamos = Prestamo::paginate(10);
-        return view('prestamoindex')->with("prestamos", $prestamos);
+
+        return view('prestamoindex')->with("prestamos", $prestamos->load('libro', 'usuario' ));
     }
 
-    public function create()
-    {
-        return view("prestamocreate");
+    public function create() {
+        $libros = Libro::all();
+        $usuarios = Usuario::all();
+        return view("prestamocreate",[
+        'libros' => $libros,
+        'usuarios' => $usuarios
+        ]);
     }
 
     /**
@@ -27,11 +35,11 @@ class PrestamoController extends Controller
     {
 
         $request->validate([
-           "fecha_solicitud" => 'required|regex:/[a-zA-Z áéíóúñ]+/i|min:3',
-           "fecha_prestamo"  => 'required|regex:/[a-zA-Z áéíóúñ]+/i|min:3',
-           "Fecha_devolucion"  => 'required|regex:/[a-zA-Z áéíóúñ]+/i|min:3',
-           "libro_id" => 'required|numeric|min:0|max:2023',
-           "usuario_id" => 'required|numeric|min:0|max|999',
+           "fecha_solicitud" => 'required',
+           "fecha_prestamo"  => 'required',
+           "fecha_devolucion"  => 'required',
+           "libro_id" => 'required',
+           "usuario_id" => 'required',
         ]);
 
         $prestamo = new prestamo();
@@ -70,11 +78,8 @@ class PrestamoController extends Controller
     public function edit($id)
     {
         //
-
-
         $prestamo = Prestamo::findOrFail($id);
         return view("prestamocreate")->with("prestamo", $prestamo);
-
     }
 
     /**
@@ -91,11 +96,11 @@ class PrestamoController extends Controller
 
 
         $request->validate([
-            "fecha_solicitud" => 'required|regex:/[a-zA-Z áéíóúñ]+/i|min:3',
-            "fecha_prestamo"  => 'required|regex:/[a-zA-Z áéíóúñ]+/i|min:3',
-            "fecha_devolucioin"  => 'required|regex:/[a-zA-Z áéíóúñ]+/i|min:3',
-            "libro_id" => 'required|numeric|min:0|max:2023',
-            "usuario_id" => 'required|numeric|min:0|max|999',
+            "fecha_solicitud" => 'required',
+           "fecha_prestamo"  => 'required',
+           "fecha_devolucion"  => 'required',
+           "libro_id" => 'required',
+           "usuario_id" => 'required',
         ]);
         $prestamo = Prestamo::findOrFail($id);
 
@@ -119,11 +124,10 @@ class PrestamoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
 
         if (Prestamo::destroy($id) > 0 ) {
-            return redirect()->route("prestamoindex")->with('mensaje', 'Se eliminó un prestamo');
+            return redirect()->route("prestamoindex")->with('mensaje', 'Se cancelo un prestamo');
         } else {
             return back();
         };

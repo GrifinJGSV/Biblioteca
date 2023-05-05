@@ -10,8 +10,8 @@ class Libro extends Model
     use HasFactory;
 
     public function prestamos(){
-        return $this->hasMany(Prestamo::class);
+        return $this->belongsToMany(Prestamo::class);
     }
 
-    
+
 }

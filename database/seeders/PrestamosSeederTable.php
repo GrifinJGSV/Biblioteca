@@ -12,6 +12,6 @@ class PrestamosSeederTable extends Seeder
      */
     public function run(): void
     {
-        Prestamo::factory()->count(200)->create();
+        Prestamo::factory()->count(20)->create();
     }
 }

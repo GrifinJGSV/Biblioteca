@@ -10,9 +10,9 @@ class Prestamo extends Model
     use HasFactory;
 
     public function libro() {
-        return $this->belongsTo(Libro::class);
+        return $this->belongsTo(Libro::class, 'libro_id');
     }
     public function usuario() {
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(Usuario::class, 'usuario_id');
     }
 }

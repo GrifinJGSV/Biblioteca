@@ -16,8 +16,8 @@ return new class extends Migration
             $table->date('fecha_solicitud');
             $table->date('fecha_prestamo');
             $table->date('fecha_devolucion');
-            $table->unsignedInteger('libro_id');
-            $table->unsignedInteger('usuario_id');
+            $table->unsignedInteger('libro_id')->references('id')->on('libros');
+            $table->unsignedInteger('usuario_id')->references('id')->on('usuarios');
             $table->timestamps();
         });
         Schema::disableForeignKeyConstraints();
@@ -28,7 +28,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('prestamos');
     }
 };
 

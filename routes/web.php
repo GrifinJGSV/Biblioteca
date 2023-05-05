@@ -38,19 +38,19 @@ Route::put('/libros/update/{id}',[LibroController::class, 'update'])
     ->name('libro.update')-> where ('id','[0-9]+');
 
 Route::delete('/libros/{id}',[LibroController::class, 'destroy'])
-    ->name('libro.borrar')->where('id','[0-9)+');
+    ->name('libro.borrar')->where('id','[0-9]+');
 
 
      // Rutas para prestamos
 
-Route::get('/prestamos',[PrestamoController::class,'index'])
+Route::get('/prestamo',[PrestamoController::class,'index'])
 -> name('prestamoindex');
 
 Route::get('/prestamos/{id}',[PrestamoController::class, 'show'])
-->where('id','[0-9]+')->name('prestamo.show');
+->where('id','[0-9]+')->name('verprestamo');
 
 Route::get('/prestamos',[PrestamoController::class, 'create'])
-->name('prestamo.create');
+->name('prestamocreate');
 
 Route::post('/prestamos/crear', [PrestamoController::class, 'store'])
 ->name('prestamo.guardar');
@@ -62,16 +62,33 @@ Route::put('/prestamos/update/{id}',[PrestamoController::class, 'update'])
 ->name('prestamo.update')-> where ('id','[0-9]+');
 
 Route::delete('/prestamos/{id}',[PrestamoController::class, 'destroy'])
-->name('prestamo.borrar')->where('id','[0-9)+');
+->name('prestamo.borrar')->where('id','[0-9]+');
 
 
 
     // Rutas para usuarios
-Route ::get('/usuarios',[UsuarioController::class,'index'])
-    -> name('usuarioindex');
+
+    Route::get('/usuario',[UsuarioController::class,'index'])
+    ->name('usuarioindex');
 
     Route::get('/usuarios',[UsuarioController::class, 'create'])
-    ->name('usuario.create');
+    ->name('usuariocreate');
+
+    Route::get('/usuarios/{id}',[UsuarioController::class, 'show'])
+    ->where('id','[0-9]+')->name('verusuario');
+
+    Route::post('/usuarios/crear', [UsuarioController::class, 'store'])
+    ->name('usuario.guardar');
+
+    Route::get('/usuarios/editar/{id}',[UsuarioController::class, 'edit'])
+    ->name('editarusuario')-> where ('id','[0-9]+');
+
+Route::put('/usuarios/update/{id}',[UsuarioController::class, 'update'])
+    ->name('usuario.update')-> where ('id','[0-9]+');
+
+Route::delete('/usuarios/{id}',[UsuarioController::class, 'destroy'])
+    ->name('usuario.borrar')->where('id','[0-9]+');
+
 
 
 
