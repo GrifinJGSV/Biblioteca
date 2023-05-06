@@ -13,15 +13,15 @@ class PrestamoController extends Controller
     public function index(){
         $prestamos = Prestamo::paginate(10);
 
-        return view('prestamoindex')->with("prestamos", $prestamos->load('libro', 'usuario' ));
+        return view('prestamoindex')->with("prestamos", $prestamos);
     }
 
     public function create() {
-        $libros = Libro::all();
-        $usuarios = Usuario::all();
+        $libros = Libro::all('titulo','id');
+        $usuarios = Usuario::all('nombre','id');
         return view("prestamocreate",[
-        'libros' => $libros,
-        'usuarios' => $usuarios
+            'libros' => $libros,
+            'usuarios' => $usuarios
         ]);
     }
 
@@ -55,6 +55,7 @@ class PrestamoController extends Controller
             return back();
         };
 
+
     }
 
     /**
@@ -75,11 +76,13 @@ class PrestamoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id) {
+
         $prestamo = Prestamo::findOrFail($id);
+        $libros = Libro::pluck('titulo','id');
+        $usuarios = Usuario::pluck('nombre','id');
         return view("prestamocreate")->with("prestamo", $prestamo);
+
     }
 
     /**
@@ -112,7 +115,7 @@ class PrestamoController extends Controller
 
 
         if ($prestamo ->save()){
-            return redirect()->route("prestamoindex")->with('mensaje', 'Se actualizó un prestamo '. $prestamo->fecha_solicitud);
+            return redirect()->route("prestamoindex")->with('mensaje', 'Se actualizó un prestamo '. $prestamo->id);
         } else {
             return back();
         };

@@ -48,10 +48,7 @@
                 <td colspan="4">No hay prestamos</td>
             </tr>
         @endforelse
-
         </tbody>
     </table>
-
-   {{-- {{$prestamos->links()}} --}}
-
+    {{$prestamos->links()}}
 @endsection

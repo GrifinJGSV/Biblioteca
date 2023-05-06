@@ -38,7 +38,7 @@ class UsuarioController extends Controller {
         $usuario->direccion = $request->input("direccion");
 
         if ($usuario->save() ) {
-            return redirect()->route("usuarioindex")->with('mensaje', 'se agrego un nuevo usuario.');
+            return redirect()->route("usuarioindex")->with('mensaje', 'se agrego un nuevo libro.');
         } else {
             return back();
         };

@@ -9,11 +9,11 @@
     @endif
 
     <h1>Usuarios <a class="btn btn-primary" href="{{route('usuariocreate')}}">Nuevo</a></h1>
-
+    
     <table class="table">
         <thead class="table table-dark table-strid">
         <tr>
-            <th scope="col">Id</th>
+            <th scope="col">id</th>
             <th scope="col">Nombre</th>
             <th scope="col">Correo</th>
             <th scope="col">Telefono</th>

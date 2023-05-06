@@ -7,21 +7,28 @@
           {{ session('mensaje') }}
         </div>
     @endif
-        <div class="col-xl-12">
-            <form action="">
-                <div class="form-row">
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="Busqueda">
 
-                    </div>
-                    <div class="col-auto">
-                        <input type="submit" class="btn btn-primary" value="Buscar">
-                    </div>
-                </div>
-            </form>
-        </div>
     <h1>Libros <a class="btn btn-primary" href="{{route('librocreate')}}">Nuevo</a></h1>
-
+    <div class="container">
+        <div class="row">
+          <div class="col-xl-12">
+            <form action="{{ route('libroindex')}}" method="get">
+              <div class="form-row">
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" name="buscar" value="{{$texto}}">
+                </div>
+                <div class="col-auto">
+                  <br>
+                  <input type="submit" class="btn btn-primary" value="Buscar">
+                  <a class="btn btn-warning" href="{{ route('libroindex') }}">Volver</a>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-xl-12">
+          </div>
+        </div>
+      </div>
     <table class="table">
         <thead class="table table-dark table-strid">
         <tr>

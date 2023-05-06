@@ -59,7 +59,7 @@ Route::get('/prestamos/editar/{id}',[PrestamoController::class, 'edit'])
 ->name('editar.prestamo')-> where ('id','[0-9]+');
 
 Route::put('/prestamos/update/{id}',[PrestamoController::class, 'update'])
-->name('prestamo.update')-> where ('id','[0-9]+');
+    ->name('prestamo.update')-> where ('id','[0-9]+');
 
 Route::delete('/prestamos/{id}',[PrestamoController::class, 'destroy'])
 ->name('prestamo.borrar')->where('id','[0-9]+');

@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 use App\Models\Libro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LibroController extends Controller {
 
-   public function index(){
-        $libros = Libro::paginate(10);
-        return view("libroindex")->with("libros", $libros);
-
+    public function index(Request $request){
+        $texto=$request->get('buscar');
+        $libros=DB::table('libros')
+                    ->select('id','titulo','autor', 'editorial', 'anio')
+                    ->where('titulo', 'LIKE', '%'.$texto.'%')
+                    ->orwhere('autor', 'LIKE', '%'.$texto.'%')
+                    ->orwhere('editorial', 'LIKE', '%'.$texto.'%')
+                    ->orwhere('cantidad_disponible', 'LIKE', '%'.$texto.'%')
+                    ->paginate(10);
+        return view ('libroindex', compact('libros','texto'));
     }
 
     public function create()  {
@@ -88,7 +95,7 @@ class LibroController extends Controller {
        Libro::destroy($id);
        return redirect()->route("libroindex")->with('mensaje', 'libro eliminado exitosamente');
          return back();
-    
+
     }
 }
 
